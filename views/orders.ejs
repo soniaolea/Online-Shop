@@ -1,0 +1,63 @@
+<%- include('includes/header.ejs') %>
+ <main>
+    <h1 id="pastorders">Past Orders</h1>
+    <div class="orderList">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Address</th> 
+                <th>City</th> 
+                <th>Province</th> 
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Products</th>
+                <th>Subtotal</th>
+                <th>Tax</th>
+                <th>Total</th>
+            </tr>
+
+            <%
+                for(order of orders){
+                    %>
+                    <tr>
+                        <td><%= order.name %></td>
+                        <td><%= order.address %></td>
+                        <td><%= order.city %></td>
+                        <td><%= order.province %></td>
+                        <td><%= order.phone %></td>
+                        <td><%= order.email %></td> 
+                        <td>
+                            <table class="subtable">
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>UCost</th>
+                                <th>Cost</th>
+                            </tr>
+                            <%
+                            for (var index in order.productsQty){
+                                if (order.productsQty[index] != undefined && order.productsQty[index] > 0){
+                                    %>
+                                    <tr>
+                                        <td><%= order.productsNames[index] %></td>
+                                        <td><%= order.productsQty[index] %></td>
+                                        <td>$<%= order.productsUnitcost[index] %></td>
+                                        <td>$<%= order.productsSubtotal[index] %></td>
+                                    </tr>
+                            <%
+                                }
+                            }
+                            %>
+                            </table>
+                        <td>$<%= order.subtotal %></td>
+                        <td>$<%= order.provinceTax %></td>
+                        <td>$<%= order.total %></td>
+                    </tr>
+                    <%
+                }
+            %>
+        </table>
+    </div>
+ </main>
+ <%- include('includes/footer.ejs') %>
+  

@@ -1,0 +1,111 @@
+<%- include('includes/header.ejs')%>
+<%
+  if(typeof(userData) == 'undefined'){
+    var userData = {};
+    userData.name ='';
+    userData.address ='';
+    userData.city = '';
+    userData.province = '';
+    userData.phone = '';
+    userData.email  = '';
+    userData.darkChocolate  = '';
+    userData.milkChocolate  = '';
+    userData.truffle = '';
+    userData.whiteChocolate = '';
+  }
+  %>
+<main>
+<form name="myform" method="Post" onsubmit="return formSubmit();" action="/receipt">
+    <div class="formcolumn"> <!-- Column 1  -->
+            <label>Name</label>
+            <input id="name" value="<%= userData.name %>" placeholder="FirstLastName" type="text" name="name"><br/>
+
+            <label>Address</label>
+            <input id="address" value="<%= userData.address %>" placeholder="# St" type="text" name="address"><br/>
+
+            <label>City</label>
+            <input id="city" value="<%= userData.city %>" placeholder="City" type="text" name="city"><br/>
+
+            <label>Province</label>
+            <select id="province" name="province">
+              <option value="">----- Select -----</option>
+              <option <% if(userData.provice == "Alberta") { %><%= 'selected' %><% } %>value="AB">Alberta</option>
+              <option <% if(userData.provice == "British Columbia") { %><%= 'selected' %><% } %>value="BC">British Columbia</option>
+              <option <% if(userData.provice == "Manitoba") { %><%= 'selected' %><% } %>value="MB">Manitoba</option>
+              <option <% if(userData.provice == "New Brunswick") { %><%= 'selected' %><% } %>value="NB">New Brunswick</option>
+              <option <% if(userData.provice == "Newfoundland and Labrador") { %><%= 'selected' %><% } %>value="NL">Newfoundland and Labrador</option>
+              <option <% if(userData.provice == "Northwest Territories") { %><%= 'selected' %><% } %>value="NT">Northwest Territories</option>
+              <option <% if(userData.provice == "Nova Scotia") { %><%= 'selected' %><% } %>value="NS">Nova Scotia</option>
+              <option <% if(userData.provice == "Nunavut") { %><%= 'selected' %><% } %>value="NV">Nunavut</option>
+              <option <% if(userData.provice == "Ontario") { %><%= 'selected' %><% } %>value="ON">Ontario</option>
+              <option <% if(userData.provice == "Prince Edward Island") { %><%= 'selected' %><% } %>value="PE">Prince Edward Island</option>
+              <option <% if(userData.provice == "Quebec") { %><%= 'selected' %><% } %>value="QC">Quebec</option>
+              <option <% if(userData.provice == "Saskatchewan") { %><%= 'selected' %><% } %>value="SK">Saskatchewan</option>
+              <option <% if(userData.provice == "Yukon") { %><%= 'selected' %><% } %>value="YK">Yukon</option>
+                <!-- <option value="">----- Select -----</option>
+                <option value="AB">Alberta</option>
+                <option value="BC">British Columbia</option>
+                <option value="MB">Manitoba</option>
+                <option value="NB">New Brunswick</option>
+                <option value="NL">Newfoundland and Labrador</option>
+                <option value="NT">Northwest Territories</option>
+                <option value="NS">Nova Scotia</option>
+                <option value="NV">Nunavut</option>
+                <option value="ON">Ontario</option>
+                <option value="PE">Prince Edward Island</option>
+                <option value="QC">Quebec</option>
+                <option value="SK">Saskatchewan</option>
+                <option value="YK">Yukon</option> -->
+            </select><br/>
+        
+            <label>Phone</label>
+            <input id="phone" value="<%= userData.phone %>" placeholder="0123456789" type="text" name="phone"><br/>
+    
+            <label>Email</label>
+            <input id="email" value="<%= userData.email %>" placeholder="email@domain.com" type="text" name="email"><br/>
+    </div>
+
+    <div class="formcolumn2"> <!-- Column 2  -->    
+        <!-- Images from Pexels  --> 
+            <div class="col">
+              <img src="/images/dark_chocolate.jpg" alt="Dark Chocolate">
+              <label>Dark Chocolate ($3.50)</label>
+              <input id="darkChocolate" value="<%= userData.darkChocolate %>" placeholder="Qty" type="text" name="darkChocolate"><br/>
+            </div>
+            <div class="col">
+              <img src="/images/milk_chocolate.jpg" alt="Milk Chocolate">
+              <label>Milk Chocolate ($2.00)</label>
+              <input id="milkChocolate" value="<%= userData.milkChocolate %>" placeholder="Qty" type="text" name="milkChocolate"><br/>
+            </div>
+            <div class="col">
+              <img src="/images/truffle.jpg" alt="Truffle">
+              <label>Raspberry Truffle ($5.00)</label>
+              <input id="truffle" value="<%= userData.truffle %>" placeholder="Qty" type="text" name="truffle"><br/>
+            </div>
+            <div class="col">
+              <img src="/images/white_chocolate.jpg" alt="White Chocolate">
+              <label>White Chocolate ($1.50)</label>
+              <input id="whiteChocolate" value="<%= userData.whiteChocolate %>" placeholder="Qty" type="text" name="whiteChocolate"><br/>
+            </div>
+    </div>
+        <br/><br/><br/>
+      <input type="submit" value="Submit">
+      <p id="errors"></p>
+    </form> 
+
+<div class="displayErrors">
+    <p id="errors">
+      <%
+      if(typeof(errors) != 'undefined'){
+        for(error of errors){
+          %>
+          <%= error.msg %><br>
+          <%
+        }
+      }
+        %>
+    </p>
+  </div>
+</main>
+  <%- include('includes/footer.ejs')%>
+
